@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'marvelapp';
+  pageTitle: string = 'MARVEL';
+  listFilterCharacterByName: string = '';
+
+  showImage: boolean = false;
+
+  toggleImage(): void {
+    this.showImage = true;
+  }
 }
