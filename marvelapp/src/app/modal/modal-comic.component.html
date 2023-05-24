@@ -1,0 +1,9 @@
+<div class="card">
+    <div class="card-header" *ngIf='showViewModal'>
+        <h4>
+            {{ModalComicTittle}}
+        </h4>
+        <h4 *ngIf='comic'>{{comic.id}}</h4>
+        <button class='buttoneCloseModal' (click)='onClick()'> Close</button>
+    </div>
+</div>

@@ -1,4 +1,6 @@
 <div class="card">
+    <app-modal-comic [comic]='comic' [showViewModal]='showViewModal'
+        (closeModal)='onCloseModal($event)'></app-modal-comic>
     <div class="card-header">
         <h4>
             {{pageTittle}}
@@ -28,7 +30,8 @@
                 </button>
                 <h4>Related comics</h4>
                 <div *ngFor='let comic of character.comics.items.slice(0,4)'>
-                    <h4> {{comic.name | deleteYear}}</h4>
+                    <button class='buttoneViewModal' (click)='viewModal(comic.resourceURI)'> {{comic.name |
+                        deleteYear}}</button>
                 </div>
             </div>
         </div>
