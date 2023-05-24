@@ -18,7 +18,10 @@ export class CharacterListComponent implements OnInit, OnDestroy {
     }
     @Input() set listFilterCharacterByName(value: string) {
         this._listFilterCharacterByName = value;
-        this.filteredCharacters = this.performFilter(value);
+        //this.filteredCharacters = this.performFilter(value);
+
+        this.getCharacter(this.pageSize, this.currentPage, this._sortBy, value);
+
     }
     pageTittle: string = 'Characters';
     imageWidth: number = 200;
@@ -32,16 +35,18 @@ export class CharacterListComponent implements OnInit, OnDestroy {
     sub!: Subscription;
 
     pageSize: number = 10;
-    currentPage: number = 0;
+    currentPage: number = 1;
     totalPages = 0;
 
     private _sortBy: string = '';
-    sortByOptions: string[] = ['', 'Option 1', 'Option 2'];
+    sortByOptions: string[] = ['', 'name', 'modified'];
     get sortBy(): string {
         return this._sortBy;
     }
     set sortBy(value: string) {
         this._sortBy = value;
+        this.getCharacter(this.pageSize, this.currentPage, value, this._listFilterCharacterByName);
+
         console.log('In setter: ', value);
     }
 
@@ -101,8 +106,8 @@ export class CharacterListComponent implements OnInit, OnDestroy {
     onCloseModal(bool: boolean): void {
         this.showViewModal = bool;
     }
-    getCharacter(limit: number, offset: number, orderBy?: string) {
-        this.sub = this.characterService.getCharacters(limit, offset, orderBy).subscribe({
+    getCharacter(pageSize: number, currentPage: number, orderBy?: string, filterByName?: string) {
+        this.sub = this.characterService.getCharacters(pageSize, currentPage, orderBy, filterByName).subscribe({
             next: data => {
                 this.characters = data.results;
                 this.filteredCharacters = this.characters;

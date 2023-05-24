@@ -8,12 +8,12 @@ import { Observable, catchError, map, tap, throwError } from "rxjs";
 })
 
 export class CharacterService {
-    private characterUrl = 'http://gateway.marvel.com/v1/public/characters?limit=10&offset=1&ts=uni&apikey=ba2ec779f5f35876c235d49de50f129b&hash=6b0b6440bc1f25f8378d58f9d62d369c';
+    private characterUrl = 'http://gateway.marvel.com/v1/public/characters?ts=uni&apikey=ba2ec779f5f35876c235d49de50f129b&hash=6b0b6440bc1f25f8378d58f9d62d369c';
 
     constructor(private http: HttpClient) { }
 
-    getCharacters(limit: number, offset: number, orderBy?: string): Observable<IData> {
-        return this.http.get<any>(this.characterUrl + '&offset=' + offset + '&limit=' + limit + (orderBy ? ('&orderBy=' + orderBy) : '')).pipe(
+    getCharacters(pageSize: number, currentPage: number, orderBy?: string, filterByName?: string): Observable<IData> {
+        return this.http.get<any>(this.characterUrl + '&limit=' + pageSize + '&offset=' + (pageSize * (currentPage - 1)) + (orderBy ? ('&orderBy=' + orderBy) : '')+ (filterByName ? ('&nameStartsWith=' + filterByName) : '')).pipe(
             map(response => response.data),
             tap(data => console.log('All', JSON.stringify(data))),
             catchError(this.handleError),
