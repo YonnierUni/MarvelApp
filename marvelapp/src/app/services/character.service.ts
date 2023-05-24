@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { ICharacter } from "../characters/character";
+import { ICharacter, IData } from "../characters/character";
 import { Observable, catchError, map, tap, throwError } from "rxjs";
 
 @Injectable({
@@ -12,9 +12,9 @@ export class CharacterService {
 
     constructor(private http: HttpClient) { }
 
-    getCharacters(): Observable<ICharacter[]> {
-        return this.http.get<any>(this.characterUrl).pipe(
-            map(response => response.data.results),
+    getCharacters(limit: number, offset: number, orderBy?: string): Observable<IData> {
+        return this.http.get<any>(this.characterUrl + '&offset=' + offset + '&limit=' + limit + (orderBy ? ('&orderBy=' + orderBy) : '')).pipe(
+            map(response => response.data),
             tap(data => console.log('All', JSON.stringify(data))),
             catchError(this.handleError),
         );

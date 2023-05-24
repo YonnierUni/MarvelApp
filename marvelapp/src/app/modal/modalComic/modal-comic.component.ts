@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IComic } from '../favourites/comic';
+import { IComic } from '../../favourites/comic';
 
 @Component({
     selector: 'app-modal-comic',

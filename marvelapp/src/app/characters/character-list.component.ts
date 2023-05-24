@@ -31,6 +31,10 @@ export class CharacterListComponent implements OnInit, OnDestroy {
     errorMessage: string = '';
     sub!: Subscription;
 
+    pageSize: number = 10;
+    currentPage: number = 0;
+    totalPages = 0;
+
     private _sortBy: string = '';
     sortByOptions: string[] = ['', 'Option 1', 'Option 2'];
     get sortBy(): string {
@@ -97,15 +101,17 @@ export class CharacterListComponent implements OnInit, OnDestroy {
     onCloseModal(bool: boolean): void {
         this.showViewModal = bool;
     }
-    ngOnInit(): void {
-        this.sub = this.characterService.getCharacters().subscribe({
-
-            next: characters => {
-                this.characters = characters;
+    getCharacter(limit: number, offset: number, orderBy?: string) {
+        this.sub = this.characterService.getCharacters(limit, offset, orderBy).subscribe({
+            next: data => {
+                this.characters = data.results;
                 this.filteredCharacters = this.characters;
             },
             error: err => this.errorMessage = err,
         });
+    }
+    ngOnInit(): void {
+        this.getCharacter(this.pageSize, this.currentPage);
         console.log('Character List In OnInit');
     }
 

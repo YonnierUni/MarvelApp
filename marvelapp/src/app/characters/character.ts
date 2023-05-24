@@ -1,3 +1,7 @@
+export interface IData {
+    total: number,
+    results: ICharacter[],
+}
 export interface ICharacter {
     id: number,
     name: string,

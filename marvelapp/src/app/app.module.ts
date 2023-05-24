@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CharacterListComponent } from './characters/character-list.component';
 import { DeleteYear } from './shared/delete-year.pipe';
 import { FavoriteComicsList } from './favourites/favorite-comics-list.component';
-import { ModalComic } from './modal/modal-comict.component';
+import { ModalComic } from './modal/modalComic/modal-comic.component';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
