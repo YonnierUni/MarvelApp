@@ -3,7 +3,32 @@
         <h4>
             {{ModalComicTittle}}
         </h4>
-        <h4 *ngIf='comic'>{{comic.id}}</h4>
+        <div *ngIf='comic'>
+            <div *ngFor='let comic of comic'>
+
+                <h4>
+                    {{comic.id}}
+                </h4>
+                <h4>
+                    {{comic.title}}
+                </h4>
+                <h4>
+                    {{comic.description}}
+                </h4>
+                <img [src]='comic.thumbnail.path+"."+comic.thumbnail.extension' [title]='comic.title'
+                    [style.width.px]='imageWidth' [style.margin.px]='imageMargin' />
+                <button class='buttoneViewMore' (click)='addedToFavourites(comic.id)'>
+                    ADDED TO FAVOURITES
+                </button>
+                <div *ngFor='let price of comic.prices'>
+
+                    <button *ngIf='price.type=="digitalPurchasePrice"' class='buttoneViewMore' (click)='buyComic(comic.id)'>
+                        BUY FOR ${{price.price}}
+                    </button>
+                </div>
+
+            </div>
+        </div>
         <button class='buttoneCloseModal' (click)='onClick()'> Close</button>
     </div>
 </div>

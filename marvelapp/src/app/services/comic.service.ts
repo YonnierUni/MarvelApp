@@ -1,21 +1,22 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { ICharacter, IData } from "../characters/character";
+import { IComic, IData } from "../favourites/comic";
 import { Observable, catchError, map, tap, throwError } from "rxjs";
 
 @Injectable({
     providedIn: "root"
 })
 
-export class CharacterService {
-    private characterUrl = 'http://gateway.marvel.com/v1/public/characters?ts=uni&apikey=ba2ec779f5f35876c235d49de50f129b&hash=6b0b6440bc1f25f8378d58f9d62d369c';
+export class ComicService {
+    private comicUrl = ``;
 
     constructor(private http: HttpClient) { }
 
-    getCharacters(pageSize: number, currentPage: number, orderBy?: string, filterByName?: string): Observable<IData> {
-        return this.http.get<any>(this.characterUrl + '&limit=' + pageSize + '&offset=' + (pageSize * (currentPage - 1)) + (orderBy ? ('&orderBy=' + orderBy) : '')+ (filterByName ? ('&nameStartsWith=' + filterByName) : '')).pipe(
+    getComic(comicId: number): Observable<IData> {    
+        this.comicUrl =`http://gateway.marvel.com/v1/public/comics/${comicId}?ts=uni&apikey=ba2ec779f5f35876c235d49de50f129b&hash=6b0b6440bc1f25f8378d58f9d62d369c`;
+        return this.http.get<any>(this.comicUrl).pipe(
             map(response => response.data),
-            tap(data => console.log('All'/*, JSON.stringify(data)*/)),
+            tap(data => console.log('COMIC'/*, JSON.stringify(data)*/)),
             catchError(this.handleError),
         );
     }

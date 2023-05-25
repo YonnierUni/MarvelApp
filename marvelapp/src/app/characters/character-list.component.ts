@@ -55,15 +55,7 @@ export class CharacterListComponent implements OnInit, OnDestroy {
 
     constructor(private characterService: CharacterService) { }
 
-    comic: IComic = {
-        id: 0,
-        title: '',
-        description: '',
-        thumbnail: {
-            path: '',
-            extension: ''
-        }
-    };
+    comicId: number = 0;
 
     performFilter(filterBy: string): ICharacter[] {
         filterBy = filterBy.toLocaleLowerCase();
@@ -92,15 +84,7 @@ export class CharacterListComponent implements OnInit, OnDestroy {
         const comicIdString = parts[parts.length - 1];
         const comicId = parseInt(comicIdString, 10);
 
-        this.comic = {
-            id: comicId,
-            title: '',
-            description: '',
-            thumbnail: {
-                path: '',
-                extension: ''
-            }
-        }
+        this.comicId = comicId;
 
     }
     onCloseModal(bool: boolean): void {

@@ -5,4 +5,16 @@
         </h4>
         
     </div>
+    <div class='table-responsive'>
+        <div class="container" *ngIf='favoriteComics.length'>
+            <div *ngFor='let favoriteComic of favoriteComics'>
+                <img [src]='favoriteComic.thumbnail.path+"."+favoriteComic.thumbnail.extension' [title]='favoriteComic.title'
+                    [style.width.px]='imageWidth' [style.margin.px]='imageMargin' />
+                <h4>{{favoriteComic.title | uppercase}}</h4>
+                <button class='buttoneViewMore' (click)='deleteToFavorites(favoriteComic.id)'>
+                    VIEW MORE
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
