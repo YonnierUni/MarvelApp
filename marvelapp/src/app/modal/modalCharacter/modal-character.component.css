@@ -99,7 +99,7 @@
 
 }
 
-.cardModalInfoForSup:hover img {
+.cardModalInfoForSup img:hover {
 
     border-radius: 50%;
 
