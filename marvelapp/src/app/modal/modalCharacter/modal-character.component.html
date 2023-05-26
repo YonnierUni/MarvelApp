@@ -1,0 +1,23 @@
+<div class="cardModal" *ngIf='showViewMore'>
+    <div class="card-header">
+        <div class='cardCloseModal'>
+            <img class='buttoneCloseModal' src="assets/icons/btn-close.png" (click)='onClick()' />
+        </div>
+        <div class='cardModalInfo' *ngIf='character'>
+            <div class='cardModalInfoFor' *ngFor='let character of character'>
+                <div class='cardModalInfoForSup'>
+                    <img [src]='character.thumbnail.path+"."+character.thumbnail.extension' [title]='character.name'
+                        [style.width.px]='imageWidth' [style.margin.px]='imageMargin' />
+                    <div>
+                        <h1>
+                            {{character.name}}
+                        </h1>
+                        <h3>
+                            {{character.description}}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,10 +19,9 @@ export class ModalComic implements OnInit, OnDestroy {
     }
     @Input() set comicId(value: number) {
         this._comicId = value;
-        //this.filteredCharacters = this.performFilter(value);
-
-        this.getComic(value);
-
+        if (value != 0) {
+            this.getComic(value);
+        }
     }
     imageWidth: number = 200;
     imageMargin: number = 2;
@@ -36,13 +35,23 @@ export class ModalComic implements OnInit, OnDestroy {
 
     onClick(): void {
         this.closeModal.emit(!this.showViewModal);
+        this.comic = undefined;
     }
-    addedToFavourites(comicId: number): void {
-        console.log("addedToFavourites ", comicId)
+
+    @Output() addedToFavourites: EventEmitter<IComic> =
+        new EventEmitter<IComic>();
+
+    onClickAddedToFavourites(comic: IComic): void {
+        this.addedToFavourites.emit(comic);
+        this.comic = undefined;
+
+        //console.log('onClickAddedToFavourites ', comic);
     }
+
     buyComic(comicId: number): void {
         console.log("buy comic ", comicId)
     }
+
     getComic(comicId: number) {
         this.sub = this.comicService.getComic(comicId).subscribe({
             next: data => {
@@ -51,6 +60,7 @@ export class ModalComic implements OnInit, OnDestroy {
             error: err => this.errorMessage = err,
         });
     }
+
     ngOnInit(): void {
         console.log('In OnInit comic');
     }

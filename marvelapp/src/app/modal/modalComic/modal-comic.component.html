@@ -1,34 +1,41 @@
-<div class="card">
-    <div class="card-header" *ngIf='showViewModal'>
-        <h4>
-            {{ModalComicTittle}}
-        </h4>
-        <div *ngIf='comic'>
-            <div *ngFor='let comic of comic'>
-
-                <h4>
-                    {{comic.id}}
-                </h4>
-                <h4>
-                    {{comic.title}}
-                </h4>
-                <h4>
-                    {{comic.description}}
-                </h4>
-                <img [src]='comic.thumbnail.path+"."+comic.thumbnail.extension' [title]='comic.title'
-                    [style.width.px]='imageWidth' [style.margin.px]='imageMargin' />
-                <button class='buttoneViewMore' (click)='addedToFavourites(comic.id)'>
-                    ADDED TO FAVOURITES
-                </button>
-                <div *ngFor='let price of comic.prices'>
-
-                    <button *ngIf='price.type=="digitalPurchasePrice"' class='buttoneViewMore' (click)='buyComic(comic.id)'>
-                        BUY FOR ${{price.price}}
-                    </button>
+<div class="cardModal" *ngIf='showViewModal'>
+    <div class="card-header">
+        <div class='cardCloseModal'>
+            <img class='buttoneCloseModal' src="assets/icons/btn-close.png" (click)='onClick()' />
+        </div>
+        <div class='cardModalInfo' *ngIf='comic'>
+            <div class='cardModalInfoFor' *ngFor='let comic of comic'>
+                <div class='cardModalInfoForSup'>
+                    <img [src]='comic.thumbnail.path+"."+comic.thumbnail.extension' [title]='comic.title' />
+                    <div>
+                        <h1>
+                            {{comic.title}}
+                        </h1>
+                        <h3>
+                            {{comic.description}}
+                        </h3>
+                    </div>
                 </div>
+                <div class='cardModalInfoForInf'>
 
+                    <div class='buttonAddFavorite' (click)='onClickAddedToFavourites(comic)'>
+                        <img class="cardModalInfoForInfIcon" src="assets/icons/btn-favourites-default.png" alt="Search Icon" />
+                        <a>ADDED TO FAVOURITES</a>
+                    </div>
+                    <div class='pricesContent' *ngIf="comic.prices">
+                        <ng-container *ngFor="let price of comic.prices">
+                            <ng-container *ngIf="price.type === 'digitalPurchasePrice'">
+                                <div class='buttonPrices' (click)='buyComic(comic.id)'>
+                                    <img class="pricesContentIcon" src="assets/icons/shopping-cart-primary.png"
+                                        alt="Search Icon" />
+                                    <a>BUY FOR ${{price.price}}</a>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
             </div>
         </div>
-        <button class='buttoneCloseModal' (click)='onClick()'> Close</button>
+
     </div>
 </div>

@@ -8,18 +8,30 @@ import { IComic, IData } from "../favourites/comic";
 })
 
 export class FavoriteComicsService {
-    private favoriteComicsId: IComic[] = [];
+    private favoriteComics: IComic[] = [];
 
     getComics(): Observable<IComic[]> {
         return new Observable<IComic[]>((observer) => {
-            setTimeout(() => {
-                observer.next(this.favoriteComicsId);
-                observer.complete();
-            }, 1000);
+            observer.next(this.favoriteComics);
+            observer.complete();
         });
     }
 
-    setComics(comics: IComic[]): void {
-        this.favoriteComicsId = [...this.favoriteComicsId, ...comics];
+    setComics(comic: IComic): void {
+        if (!this.favoriteComics.find(comicc => comicc.id === comic.id)) {
+            this.favoriteComics.push(comic);
+        }
+    }
+
+    deleteComic(comicId: number): void {
+        var comicToRemove = this.favoriteComics.find(comic => comic.id === comicId);
+
+        // Eliminar el objeto utilizando la referencia almacenada
+        if (comicToRemove) {
+            const index = this.favoriteComics.indexOf(comicToRemove);
+            if (index !== -1) {
+                this.favoriteComics.splice(index, 1);
+            }
+        }
     }
 }

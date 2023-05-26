@@ -1,20 +1,22 @@
-<div class="card">
-    <div class="card-header">
-        <h4>
+<div class="cardFavorite">
+    <div class="cardHeaderFavorite">
+        <img class="icon" src="assets/icons/favourites.png" alt="Search Icon" />
+        <h1>
             {{FavoriteComicsListTittle}}
-        </h4>
-        
+        </h1>
+
     </div>
-    <div class='table-responsive'>
+    <div class='cardBodyFavorite'>
         <div class="container" *ngIf='favoriteComics.length'>
             <div *ngFor='let favoriteComic of favoriteComics'>
-                <img [src]='favoriteComic.thumbnail.path+"."+favoriteComic.thumbnail.extension' [title]='favoriteComic.title'
-                    [style.width.px]='imageWidth' [style.margin.px]='imageMargin' />
+                <div class='contentIcon'>
+                    <img class="icon" src="assets/icons/btn-delete.png" (click)='deleteToFavorites(favoriteComic.id)' />
+                </div>
+                <img class="imagen" [src]='favoriteComic.thumbnail.path+"."+favoriteComic.thumbnail.extension'
+                    [title]='favoriteComic.title' />
                 <h4>{{favoriteComic.title | uppercase}}</h4>
-                <button class='buttoneViewMore' (click)='deleteToFavorites(favoriteComic.id)'>
-                    VIEW MORE
-                </button>
             </div>
         </div>
     </div>
+
 </div>

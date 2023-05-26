@@ -1,3 +1,259 @@
-.card{
+.card {
     display: flex;
+    width: 100%;
+}
+
+
+
+.card-containt {
+    width: 75%;
+    min-width: 1000px;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+}
+
+.card-containt-favorite {
+    width: 25%;
+    min-width: 300px;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: #EBEBEB;
+
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.card-header h1 {
+    font-weight: bold;
+}
+
+.card-header .icon {
+    object-fit: scale-down;
+}
+
+.left-content {
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
+
+.right-content {
+    display: flex;
+    align-items: center;
+    width: 30%;
+}
+
+.selectComponent {
+    width: 100%;
+    height: 52px;
+
+}
+
+.characterContaint {
+    margin-top: 3%;
+}
+
+.character {
+    display: grid;
+
+    row-gap: 30px;
+    column-gap: 50px;
+    grid-template-columns: auto auto;
+    grid-auto-rows: 400px;
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1100px) {
+
+    .character {
+        grid-template-columns: auto;
+    }
+
+}
+
+.cardCharacter {
+    background-color: #FFFFFF;
+    padding: 5%;
+}
+
+.cardCharacter:hover h2 {
+    color: #EC1E23;
+}
+
+.cardCharacterHeader {
+    height: 70%;
+    width: 110%;
+    display: flex;
+    justify-content: center;
+    margin-top: -10%;
+    margin-left: -10%;
+}
+
+.cardCharacterHeaderImg {
+    width: 50%;
+    height: 90%;
+}
+
+.cardCharacterHeaderImg img {
+    border-radius: 50%;
+    width: 90%;
+    height: 100%;
+    object-fit: fill;
+
+    -webkit-box-shadow: 10px 10px 18px -7px rgba(0, 0, 0, 0.58);
+    -moz-box-shadow: 10px 10px 18px -7px rgba(0, 0, 0, 0.58);
+    box-shadow: 10px 10px 18px -7px rgba(0, 0, 0, 0.58);
+}
+
+.cardCharacterHeaderInfo {
+    margin-top: -2.9%;
+    width: 50%;
+}
+
+.cardCharacterHeaderInfo h2 {
+    color: #4A4444;
+}
+
+.cardCharacterHeaderInfo h4 {
+    display: -webkit-box;
+
+    margin-top: -4%;
+
+    line-height: 1;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    width: 100%;
+    height: 117px;
+
+    line-height: 20px;
+    /* Interlineado de 24 píxeles */
+
+    color: #7C797A;
+}
+
+.cardCharacterHeaderInfo button {
+    width: 50%;
+    height: 19%;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #EC1E23;
+    border: none;
+    transition: transform 0.3s ease;
+
+}
+
+.cardCharacterHeaderInfo button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+
+}
+
+.cardCharacterFooter h3 {
+    color: #4A4444;
+}
+
+.cardCharacterFooter h4 {
+    color: #7C797A;
+}
+
+.cardCharacterFooterRelated {
+    display: grid;
+
+    row-gap: 30%;
+    column-gap: 10%;
+    grid-template-columns: 35% 40%;
+    grid-auto-rows: auto;
+    margin-bottom: 20px;
+}
+
+.cardCharacterFooterRelated div {
+    display: flex;
+}
+
+.cardCharacterFooterRelatedComic img {
+    margin-top: -15px;
+    object-fit: scale-down;
+    width: 0px;
+    transition: transform 0.3s ease;
+
+
+}
+
+.cardCharacterFooterRelated a {
+    color: #7C797A;
+    transition: transform 0.3s ease;
+
+}
+
+.cardCharacterFooterRelated a:hover {
+    color: #EC1E23;
+    cursor: pointer;
+}
+
+.cardCharacterFooterRelatedComic:hover img {
+    width: 20%;
+}
+
+.buttoneViewModal {
+    width: 100%;
+    display: -webkit-box;
+
+
+    line-height: 1;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    width: 100%;
+    height: 35px;
+}
+
+.modal-overla {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo oscuro con transparencia */
+    z-index: 999;
+    /* Asegúrate de que el z-index sea superior al del modal */
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pagination button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border: none;
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    -webkit-box-shadow: 0px 0px 6px -3px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 6px -3px rgba(0,0,0,1);
+    box-shadow: 0px 0px 6px -3px rgba(0,0,0,1);
+    transition: transform 0.3s ease;
+
+}
+.pagination button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
 }

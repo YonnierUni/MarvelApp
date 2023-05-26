@@ -1,45 +1,76 @@
 <div class="card">
     <div class="card-containt">
-
-        <app-modal-comic [comicId]='comicId' [showViewModal]='showViewModal'
-            (closeModal)='onCloseModal($event)'></app-modal-comic>
+        <app-modal-comic [comicId]='comicId' [showViewModal]='showViewModal' (closeModal)='onCloseModal($event)'
+            (addedToFavourites)='onAddedToFavorites($event)'></app-modal-comic>
+        <app-modal-character [characterId]='characterId' [showViewMore]='showViewMore'
+            (closeViewMore)='onViewMore($event)'></app-modal-character>
         <div class="card-header">
-            <h4>
-                {{pageTittle}}
-            </h4>
-            <select [(ngModel)]="sortBy">
-                <option *ngFor="let option of sortByOptions">
-                    {{option}}
-                </option>
-            </select>
+            <div class="left-content">
+                <img class="icon" src="assets/icons/characters.png" alt="Search Icon" />
+                <h1>
+                    {{pageTittle}}
+                </h1>
+            </div>
+            <div class='right-content'>
+                <select class='selectComponent' [(ngModel)]="sortBy">
+                    <option value="" disabled selected hidden>
+                        Sort by
+                    </option>
+                    <option *ngFor="let option of sortByOptions">
+                        {{option}}
+                    </option>
+                </select>
+            </div>
         </div>
-        <div class='card-body'>
-            <h4>Filtered by: {{listFilterCharacterByName}}</h4>
-        </div>
-        <div *ngIf='showViewMore'>
-            <h4>VIEW MORE</h4>
-            <h4>{{idCharacter}}</h4>
-        </div>
-        <div class='table-responsive'>
-            <div class="container" *ngIf='filteredCharacters.length'>
-                <div *ngFor='let character of filteredCharacters'>
-                    <img [src]='character.thumbnail.path+"."+character.thumbnail.extension' [title]='character.name'
-                        [style.width.px]='imageWidth' [style.margin.px]='imageMargin' />
-                    <h4>{{character.name | uppercase}}</h4>
-                    <h4>{{character.description}}</h4>
-                    <button class='buttoneViewMore' (click)='viewMore(character.id)'>
-                        VIEW MORE
-                    </button>
-                    <h4>Related comics</h4>
-                    <div *ngFor='let comic of character.comics.items.slice(0,4)'>
-                        <button class='buttoneViewModal' (click)='viewModal(comic.resourceURI)'> {{comic.name |
-                            deleteYear}}</button>
+        <div class='characterContaint'>
+            <div class="character" *ngIf='filteredCharacters.length'>
+                <div class='cardCharacter' *ngFor='let character of filteredCharacters'>
+                    <div class='cardCharacterHeader'>
+                        <div class='cardCharacterHeaderImg'>
+                            <img [src]='character.thumbnail.path+"."+character.thumbnail.extension'
+                                [title]='character.name' />
+                        </div>
+                        <div class='cardCharacterHeaderInfo'>
+                            <h2>{{character.name| uppercase}}</h2>
+                            <h4>
+                                {{character.description.length!=0?
+                                character.description:"There is no defined description for this character..." }}
+                            </h4>
+                            <button class='buttoneViewMore' (click)='viewMore(character.id)'>
+                                VIEW MORE
+                            </button>
+                        </div>
+                    </div>
+                    <div class='cardCharacterFooter'>
+                        <h3>Related comics</h3>
+                        <div class='cardCharacterFooterRelated'>
+                            <div class='cardCharacterFooterRelatedComic'
+                                *ngFor='let comic of character.comics.items.slice(0,4)'>
+                                <img src="assets/icons/link-arrow.png" />
+                                <a class='buttoneViewModal' (click)='viewModal(comic.resourceURI)'> {{comic.name |
+                                    deleteYear}}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class='pagination'>
+            <button (click)="goToPage(1)" [disabled]="currentPage === 1">1</button>
+            <button (click)="previousPage()" [disabled]="currentPage === 1">
+                <img [src]='currentPage === 1?"assets/icons/btn_arrow_left.png":"assets/icons/btn_arrow_right_2.png"' />
+            </button>
+            <button *ngFor="let page of pageNumbers" (click)="goToPage(page)" [disabled]="currentPage === page">
+                {{ page }}</button>
+            <button (click)="nextPage()" [disabled]="currentPage === totalPages">
+                <img
+                    [src]='currentPage === totalPages?"assets/icons/btn_arrow_left_2.png":"assets/icons/btn_arrow_right.png"' />
+            </button>
+            <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">{{ totalPages }}</button>
+
+        </div>
     </div>
-    <div>
-        <app-favorite-comics></app-favorite-comics>
+    <div class="card-containt-favorite">
+        <app-favorite-comics [newFavoriteComic]='addedToFavoriteComic'></app-favorite-comics>
     </div>
 </div>

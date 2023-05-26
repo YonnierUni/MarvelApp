@@ -11,7 +11,6 @@ import { FavoriteComicsService } from '../services/favoriteComics';
 
 export class FavoriteComicsList implements OnInit {
     FavoriteComicsListTittle: string = 'My Favourites';
-    favoriteComicsId: number[] = [];
     favoriteComics: IComic[] = [];
     imageWidth: number = 200;
     imageMargin: number = 2;
@@ -19,15 +18,26 @@ export class FavoriteComicsList implements OnInit {
     sub!: Subscription;
     constructor(private favoriteComicsService: FavoriteComicsService) { }
 
-    addedToFavorites(comicId: number): void {
-        console.log("addedToFavourites ", comicId)
+    private _newFavoriteComic: IComic | undefined;
+
+    get newFavoriteComic(): IComic | undefined {
+        return this._newFavoriteComic;
+    }
+    @Input() set newFavoriteComic(comic: IComic | undefined) {
+        this._newFavoriteComic = comic;
+        if (comic !== undefined) {
+            this.favoriteComicsService.setComics(comic);
+        }
+        console.log("addedToFavourites ", comic);
     }
 
     deleteToFavorites(comicId: number): void {
-        console.log("deleteToFavourites ", comicId)
+        this.favoriteComicsService.deleteComic(comicId);
+        //this.getComic();
+        // console.log("deleteToFavourites ", this.getComic());
     }
 
-    getComic(comicId: number) {
+    getComic() {
         this.sub = this.favoriteComicsService.getComics().subscribe({
             next: data => {
                 this.favoriteComics = data;
@@ -37,7 +47,8 @@ export class FavoriteComicsList implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log('In OnInit');
+        this.getComic();
+        console.log('Favorite In OnInit');
     }
     ngOnDestroy(): void {
         this.sub.unsubscribe();
