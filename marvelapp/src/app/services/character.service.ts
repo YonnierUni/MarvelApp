@@ -8,7 +8,7 @@ import { Observable, catchError, map, tap, throwError } from "rxjs";
 })
 
 export class CharacterService {
-    private charactersUrl = 'http://gateway.marvel.com/v1/public/characters?ts=uni&apikey=978cd9dacbc0732e670bff073914653f&hash=b4734b698f1e4ec6e0ec2eab0d95b248';
+    private charactersUrl = 'https://gateway.marvel.com/v1/public/characters?ts=uni&apikey=978cd9dacbc0732e670bff073914653f&hash=b4734b698f1e4ec6e0ec2eab0d95b248';
 
     constructor(private http: HttpClient) { }
 
@@ -21,7 +21,7 @@ export class CharacterService {
     }
 
     getCharacter(characterId: number): Observable<IData> {
-        var characterUrl = `http://gateway.marvel.com/v1/public/characters/${characterId}?ts=uni&apikey=978cd9dacbc0732e670bff073914653f&hash=b4734b698f1e4ec6e0ec2eab0d95b248`;
+        var characterUrl = `https://gateway.marvel.com/v1/public/characters/${characterId}?ts=uni&apikey=978cd9dacbc0732e670bff073914653f&hash=b4734b698f1e4ec6e0ec2eab0d95b248`;
         return this.http.get<any>(characterUrl).pipe(
             map(response => response.data),
             tap(data => console.log('COMIC'/*, JSON.stringify(data)*/)),

@@ -13,7 +13,7 @@ export class ComicService {
     constructor(private http: HttpClient) { }
 
     getComic(comicId: number): Observable<IData> {    
-        this.comicUrl =`http://gateway.marvel.com/v1/public/comics/${comicId}?ts=uni&apikey=978cd9dacbc0732e670bff073914653f&hash=b4734b698f1e4ec6e0ec2eab0d95b248`;
+        this.comicUrl =`https://gateway.marvel.com/v1/public/comics/${comicId}?ts=uni&apikey=978cd9dacbc0732e670bff073914653f&hash=b4734b698f1e4ec6e0ec2eab0d95b248`;
         return this.http.get<any>(this.comicUrl).pipe(
             map(response => response.data),
             tap(data => console.log('COMIC'/*, JSON.stringify(data)*/)),
