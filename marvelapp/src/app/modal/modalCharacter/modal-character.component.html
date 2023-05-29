@@ -7,7 +7,7 @@
             <div class='cardModalInfoFor' *ngFor='let character of character'>
                 <div class='cardModalInfoForSup'>
                     <img [src]='character.thumbnail.path+"."+character.thumbnail.extension' [title]='character.name'
-                        [style.width.px]='imageWidth' [style.margin.px]='imageMargin' />
+                        />
                     <div>
                         <h1>
                             {{character.name}}
