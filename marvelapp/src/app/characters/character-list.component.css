@@ -6,8 +6,11 @@
 
 
 .card-containt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 75%;
-    min-width: 1000px;
+    /*min-width: 1000px;*/
     margin-left: 3%;
     margin-right: 3%;
     margin-top: 1%;
@@ -17,7 +20,7 @@
 
 .card-containt-favorite {
     width: 25%;
-    min-width: 300px;
+    /* min-width: 300px;*/
     padding-left: 2%;
     padding-right: 2%;
     padding-top: 1%;
@@ -28,6 +31,7 @@
 
 .card-header {
     display: flex;
+    width: 100%;
     justify-content: space-between;
 
 }
@@ -56,6 +60,13 @@
     width: 100%;
     height: 52px;
 
+    padding-left:5%;
+    border: 1px solid #ccc;
+    color: #757575;
+}
+.selectComponent option{
+
+    color: black;
 }
 
 .characterContaint {
@@ -68,17 +79,9 @@
     row-gap: 30px;
     column-gap: 50px;
     grid-template-columns: auto auto;
-    grid-auto-rows: 400px;
     margin-bottom: 20px;
 }
 
-@media screen and (max-width: 1100px) {
-
-    .character {
-        grid-template-columns: auto;
-    }
-
-}
 
 .cardCharacter {
     background-color: #FFFFFF;
@@ -106,8 +109,9 @@
 .cardCharacterHeaderImg img {
     border-radius: 50%;
     width: 90%;
-    height: 100%;
+    height: auto;
     object-fit: fill;
+    aspect-ratio: 1/1;
 
     -webkit-box-shadow: 10px 10px 18px -7px rgba(0, 0, 0, 0.58);
     -moz-box-shadow: 10px 10px 18px -7px rgba(0, 0, 0, 0.58);
@@ -235,8 +239,9 @@
 
 .pagination {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 70%;
 }
 
 .pagination button {
@@ -246,7 +251,7 @@
     background-color: #FFFFFF;
     border: none;
     margin: 5px;
-    width: 50px;
+    width: 10%;
     height: 50px;
     -webkit-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 1);
     -moz-box-shadow: 0px 0px 6px -3px rgba(0, 0, 0, 1);
@@ -258,4 +263,15 @@
 .pagination button:hover {
     cursor: pointer;
     transform: scale(1.1);
+}
+
+
+@media screen and (max-width: 1000px) {
+
+    .character {
+        grid-template-columns: auto;
+    }
+
+    .cardCharacterHeader {
+    }
 }
